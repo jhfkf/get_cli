@@ -26,8 +26,8 @@ import 'package:${PubspecUtils.projectName}/$_controllerDir';
 class $_bindingName extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<${_fileName.pascalCase}Controller>(
-      () => ${_fileName.pascalCase}Controller(),
+    Get.lazyPut<${_fileName.pascalCase}Logic>(
+      () => ${_fileName.pascalCase}Logic(),
     );
   }
 }

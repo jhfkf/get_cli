@@ -34,9 +34,9 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   pathSplit.removeLast();
 
   ///remove view folder
-  if (PubspecUtils.extraFolder ?? true) {
-    pathSplit.removeLast();
-  }
+  // if (PubspecUtils.extraFolder ?? true) {
+  //   pathSplit.removeLast();
+  // }
 
   pathSplit.removeWhere((element) => element == 'app' || element == 'modules');
 
@@ -46,6 +46,9 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   }
   var route = pathSplit.join('/');
 
+  if (pathSplit.length > 1) {
+    nameRoute = pathSplit.join('_');
+  }
   var declareRoute = 'static const ${nameRoute.snakeCase.toUpperCase()} =';
   var line = "$declareRoute '/$route';";
   if (supportChildrenRoutes) {
@@ -72,9 +75,11 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
 /// Create routes from the path
 String _pathsToRoute(List<String> pathSplit) {
   var sb = StringBuffer();
+  var pathList = [];
   for (var e in pathSplit) {
+    pathList.add(e);
     sb.write('_Paths.');
-    sb.write(e.snakeCase.toUpperCase());
+    sb.write(pathList.join('_').snakeCase.toUpperCase());
     if (e != pathSplit.last) {
       sb.write(' + ');
     }

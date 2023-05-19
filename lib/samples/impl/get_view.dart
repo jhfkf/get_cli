@@ -20,12 +20,20 @@ class GetViewSample extends Sample {
   String get _controllerName =>
       _controller.isNotEmpty ? 'GetView<$_controller>' : 'GetView';
 
+  // class $_viewName extends $_controllerName {
+
   String get _flutterView => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
+
+import 'logic.dart';
 $import
 
-class $_viewName extends $_controllerName {
- const $_viewName({Key? key}) : super(key: key);
+class $_viewName extends StatelessWidget {
+  $_viewName({Key? key}) : super(key: key);
+ 
+  final logic = Get.find<$_controller>();
+  final state = Get.find<$_controller>().state;
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -14,7 +14,7 @@ import 'get_support_children.dart';
 void addAppPage(String name, String bindingDir, String viewDir) {
   var appPagesFile = findFileByName('app_pages.dart');
   var path = viewDir;
-  var lines = <String>[];
+  var lines = <String>[];  // lines 所有内容
   if (appPagesFile.path.isEmpty) {
     AppPagesSample().create(skipFormatter: true);
     appPagesFile = File(AppPagesSample().path);
@@ -40,13 +40,24 @@ void addAppPage(String name, String bindingDir, String viewDir) {
     pathSplit
         .removeWhere((element) => element == 'app' || element == 'modules');
     var onPageIndex = -1;
-    while (pathSplit.isNotEmpty && onPageIndex == -1) {
+    if (pathSplit.length > 1) {
       onPageIndex = lines.indexWhere(
-          (element) => element
-              .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()},'),
+              (element) => element
+              .contains('_Paths.${pathSplit.join('_').snakeCase.toUpperCase()},'),
           indexRoutes);
-
       pathSplit.removeLast();
+    }
+    if (onPageIndex == -1) {
+      while (pathSplit.isNotEmpty && onPageIndex == -1) {
+        onPageIndex = lines.indexWhere(
+                (element) =>
+                element
+                    .contains(
+                    '_Paths.${pathSplit.last.snakeCase.toUpperCase()},'),
+            indexRoutes);
+
+        pathSplit.removeLast();
+      }
     }
     if (onPageIndex != -1) {
       var onPageStartIndex = lines
@@ -96,7 +107,7 @@ void addAppPage(String name, String bindingDir, String viewDir) {
   var namePascalCase = name.pascalCase;
   var line = '''${_getTabs(tabEspaces)}GetPage(
 ${_getTabs(tabEspaces + 1)}name: $routesOrPath.${nameSnakeCase.toUpperCase()}, 
-${_getTabs(tabEspaces + 1)}page:()=> const ${namePascalCase}View(), 
+${_getTabs(tabEspaces + 1)}page:()=> ${namePascalCase}Page(), 
 ${_getTabs(tabEspaces + 1)}binding: ${namePascalCase}Binding(),
 ${_getTabs(tabEspaces)}),''';
 

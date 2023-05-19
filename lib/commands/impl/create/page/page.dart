@@ -15,6 +15,7 @@ import '../../../../functions/create/create_single_file.dart';
 import '../../../../functions/routes/get_add_route.dart';
 import '../../../../samples/impl/get_binding.dart';
 import '../../../../samples/impl/get_controller.dart';
+import '../../../../samples/impl/get_state.dart';
 import '../../../../samples/impl/get_view.dart';
 import '../../../interface/command.dart';
 
@@ -78,9 +79,18 @@ class CreatePageCommand extends Command {
   void _writeFiles(String path, String name, {bool overwrite = false}) {
     var isServer = PubspecUtils.isServerProject;
     var extraFolder = PubspecUtils.extraFolder ?? true;
+
+    var pathSplit = path.split('/');
+    pathSplit.removeWhere((element) => element == 'app' || element == 'modules' || element == 'lib');
+    for (var i = 0; i < pathSplit.length; i++) {
+      pathSplit[i] =
+          pathSplit[i].snakeCase.snakeCase.toLowerCase().replaceAll('_', '-');
+    }
+    name = pathSplit.join('_').camelCase;
+
     var controllerFile = handleFileCreate(
       name,
-      'controller',
+      'logic',
       path,
       extraFolder,
       ControllerSample(
@@ -89,7 +99,7 @@ class CreatePageCommand extends Command {
         isServer,
         overwrite: overwrite,
       ),
-      'controllers',
+      'logics',
     );
     var controllerDir = Structure.pathToDirImport(controllerFile.path);
     var viewFile = handleFileCreate(
@@ -99,8 +109,8 @@ class CreatePageCommand extends Command {
       extraFolder,
       GetViewSample(
         '',
-        '${name.pascalCase}View',
-        '${name.pascalCase}Controller',
+        '${name.pascalCase}Page',
+        '${name.pascalCase}Logic',
         controllerDir,
         isServer,
         overwrite: overwrite,
@@ -123,6 +133,22 @@ class CreatePageCommand extends Command {
       'bindings',
     );
 
+    var stateFile = handleFileCreate(
+      name,
+      'state',
+      path,
+      extraFolder,
+      StateSample(
+        '',
+        name,
+        '${name.pascalCase}State',
+        controllerDir,
+        isServer,
+        overwrite: overwrite,
+      ),
+      'states',
+    );
+    // 添加路由
     addRoute(
       name,
       Structure.pathToDirImport(bindingFile.path),

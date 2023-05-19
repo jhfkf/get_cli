@@ -6,6 +6,11 @@
 GetX™ 框架的官方 CLI。
 
 ```dart
+flutter version: 3.3.8
+dart version: 2.18.4
+// 打包成可执行文件
+dart compile exe bin/get.dart -o bin/get
+
 // 安装:
 pub global activate get_cli 
 // 使用本命令需要设置系统环境变量: [FlutterSDK安装目录]\bin\cache\dart-sdk\bin 和 [FlutterSDK安装目录]\.pub-cache\bin

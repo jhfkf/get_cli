@@ -17,7 +17,6 @@ class ControllerSample extends Sample {
 
 class ${_fileName.pascalCase}Controller extends GetxController {
   //TODO: Implement ${_fileName.pascalCase}Controller
-  
 
   @override
   void onInit() {
@@ -30,16 +29,22 @@ class ${_fileName.pascalCase}Controller extends GetxController {
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    super.onClose();
+  }
 
 }
 ''';
   String get flutterController => '''import 'package:get/get.dart';
 
-class ${_fileName.pascalCase}Controller extends GetxController {
-  //TODO: Implement ${_fileName.pascalCase}Controller
+import 'state.dart';
+
+class ${_fileName.pascalCase}Logic extends GetxController {
+  //TODO: Implement ${_fileName.pascalCase}Logic
   
-  final count = 0.obs;
+  // @override
+  final ${_fileName.pascalCase}State state = ${_fileName.pascalCase}State();
+
   @override
   void onInit() {
     super.onInit();
@@ -52,7 +57,6 @@ class ${_fileName.pascalCase}Controller extends GetxController {
   void onClose() {
     super.onClose();
   }
-  void increment() => count.value++;
 }
 ''';
 }
