@@ -12,7 +12,7 @@ import '../formatter_dart_file/frommatter_dart_file.dart';
 import 'get_support_children.dart';
 
 void addAppPage(String name, String bindingDir, String viewDir) {
-  var appPagesFile = findFileByName('app_pages.dart');
+  var appPagesFile = findFileByName('routes_pages.dart');
   var path = viewDir;
   var lines = <String>[];  // lines 所有内容
   if (appPagesFile.path.isEmpty) {
@@ -143,7 +143,7 @@ int _countTabs(String line) {
 /// log invalid format file
 void _logInvalidFormart() {
   LogService.info(
-      'the app_pages.dart file does not meet the '
+      'the routes_pages.dart file does not meet the '
       'expected format, fails to create children pages',
       false,
       false);

@@ -16,7 +16,7 @@ import 'get_support_children.dart';
 
 /// This command will create the route to the new page
 void addRoute(String nameRoute, String bindingDir, String viewDir) {
-  var routesFile = findFileByName('app_routes.dart');
+  var routesFile = findFileByName('routes_names.dart');
   //var lines = <String>[];
   var content = '';
 

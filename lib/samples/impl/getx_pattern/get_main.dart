@@ -7,7 +7,7 @@ class GetXMainSample extends Sample {
   String get _flutterMain => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app/routes/app_pages.dart';
+import 'app/routes/routes_pages.dart';
 
 void main() {
   runApp(
@@ -21,7 +21,7 @@ void main() {
   ''';
 
   String get _serverMain => '''import 'package:get_server/get_server.dart';
-import 'app/routes/app_pages.dart';
+import 'app/routes/routes_pages.dart';
 
 void main() {
   runApp(GetServer(

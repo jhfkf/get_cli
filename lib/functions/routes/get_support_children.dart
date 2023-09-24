@@ -8,11 +8,12 @@ bool get supportChildrenRoutes {
   if (PubspecUtils.isServerProject) {
     return false;
   }
-  var supportChildren = Version.parse('3.21.0').compareTo(
-          PubspecUtils.getPackageVersion('get') ?? Version.parse('3.21.0')) <=
-      0;
+  var supportChildren = true;
+  // Version.parse('3.21.0').compareTo(
+  //         PubspecUtils.getPackageVersion('get') ?? Version.parse('3.21.0')) <=
+  //     0;
   if (supportChildren) {
-    var routesFile = findFileByName('app_routes.dart');
+    var routesFile = findFileByName('routes_names.dart');
     if (routesFile.path.isNotEmpty) {
       supportChildren =
           routesFile.readAsLinesSync().contains('abstract class _Paths {') ||
