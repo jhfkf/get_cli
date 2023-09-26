@@ -1,3 +1,5 @@
+import 'package:get_cli/commands/impl/create/list/list.dart';
+
 import 'impl/commads_export.dart';
 import 'interface/command.dart';
 
@@ -7,6 +9,7 @@ final List<Command> commands = [
     [
       CreateControllerCommand(),
       CreatePageCommand(),
+      CreatePageListPageCommand(),
       CreateProjectCommand(),
       CreateProviderCommand(),
       CreateScreenCommand(),
