@@ -59,7 +59,9 @@ import 'package:get/get.dart';
 
 import '../../data/theme/app_styles.dart';
 import '../../utils/widget/utils_public_widget.dart';
+import '../../utils/widget/widget_image_load.dart';
 import '../../utils/widget/widget_smart_refresher.dart';
+import '../../../app/utils/extensions/index.dart';
 
 $import
 

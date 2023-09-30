@@ -38,7 +38,9 @@ class $_stateName {
 
   RefreshController controller = RefreshController();
   
-  var ${_stateName.substring(0, _stateName.length - 4).toLowerCase()}List = [];
+  int limit = 10;
+  
+  var ${_stateName.substring(0, _stateName.length - 5).camelCase}List = [];
 
   $_stateName() {
     ///Initialize variables

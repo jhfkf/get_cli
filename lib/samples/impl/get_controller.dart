@@ -71,7 +71,9 @@ class ${_fileName.pascalCase}Logic extends GetxController {
   String get flutterListController => '''import 'package:get/get.dart';
 
 import '../../api/api.dart';
+import '../../../app/utils/extensions/index.dart';
 import '../../utils/widget/widget_smart_refresher.dart';
+import '../../../generated/assets.dart';
 
 import 'state.dart';
 
@@ -128,7 +130,12 @@ class ${_fileName.pascalCase}Logic extends GetxController with StateMixin {
       List.from(pageEntity.list!.toList())
           .map((e) => ${_fileName.pascalCase}Entity.fromJson(e))
           .toList();
-      state.controller.loadComplete();
+      if (newRequestData.length < state.limit) {
+        // 已经加载至尾页-设置不可上拉
+        state.controller.loadNoData();
+      } else {
+        state.controller.loadComplete();
+      }
       // 添加进本地列表
       state.${_fileName.camelCase}List.addAll(newRequestData);
       if (newRequestData.isNotEmpty) {
